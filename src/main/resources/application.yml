@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: @project.artifactId@
+    index: ${spring.application.name}
+  data:
+    mongodb:
+      uri: mongodb+srv://...:...@mymongodbcluster-hwri1.mongodb.net/swapi-db?retryWrites=true
+  jackson:
+    default-property-inclusion: non_null
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    serialization:
+      write_dates_as_timestamps: false
+      write_date_timestamps_as_nanoseconds: false
+      write_empty_json_arrays: false
+
+# Feign
+feign.compression.request.mime-types: "application/json"
+
+# Server
+server:
+  port: 0
+  compression:
+    enabled: true
+
+swapi:
+  external:
+    apiurl: http://swapi.co/api/
+
+---
+
+spring:
+  profiles: development
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/swapi-db?minPoolSize=10&maxIdleTimeMS=240000&connectTimeoutMS=5000&socketTimeoutMS=15000
